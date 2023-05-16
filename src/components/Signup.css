@@ -1,0 +1,100 @@
+body{
+    background: #edf0f1;  
+    
+}
+
+.form{
+    background-color: rgb(200, 152, 240);
+    border-radius: 20px;
+    width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    height: 580px;
+}
+
+.form-body{
+    text-align: left;
+    padding: 20px 10px;
+    color:white;
+    font-size: x-large;
+   
+}
+
+.form__label{
+    width: 40%;
+    font-size:large;
+    justify-content: space-around;
+}
+.footer{
+    text-align: center;
+    size:80px ;
+   
+}
+.main{
+    justify-content: center;
+    height: 100%;
+}
+.box{
+    background-color: rgb(245, 243, 247);
+    border-radius: 5px;
+    height: 7rem;
+    white-space:0;
+}
+.box h2{
+    text-align: center;
+    background: -webkit-linear-gradient(#eee, rgb(69, 57, 248));
+    -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+.box p{
+    text-align: center;
+}
+.btn1{
+    border-radius: 5px;
+    font-size: medium;
+    background-color:white;
+    color:black;
+    border-color: #edf0f1;
+    width:10rem;
+}
+.btn1:hover{
+    background-color: #97a1b1;
+}
+.agree{
+    font-size: large;
+}
+.form__input{
+    border-radius: 10px;
+    background-color: transparent;
+    width: 100%;
+    border-color: #edf0f1;
+}
+#loginlink{
+    color:black;
+}
+.two{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.showpass{
+    position: absolute;
+    right: 0;
+    top:1px;
+    padding: 7px 10px;
+    margin-right: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2a4365;
+    background-color: #EDF2F7;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    margin-bottom: 25px;
+}
+.form__inputpass{
+    border-radius: 10px;
+    background-color: transparent;
+    width: 90%;
+    border-color: #edf0f1;
+}

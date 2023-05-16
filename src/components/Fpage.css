@@ -1,0 +1,50 @@
+.aml{
+    height: 220px;
+    width: 1500px;
+}
+.space{
+    height:20px;
+}
+.paragraph{
+    background-color: rgb(219, 246, 253);
+    height:130px;
+    text-align: center;
+    width: 980px;
+    font-size: smaller;
+    padding: 10px;
+    justify-content: center;
+    margin-left: 230px;
+    margin-right: 230px;
+
+}
+.btn {
+    background-color: #d89cd5;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 650px;
+    border-radius: 5px;
+    font-size: large;
+  }
+  
+  .amp{
+    width:1000px;
+    margin-left:230px;
+    height:5%;
+    margin-right:230px ;
+  }
+  .amp1{
+    width:1000px;
+    margin-left:230px;
+    margin-right:230px ;
+    height: 1%;
+  }
+  .h1{
+    margin-left:230px;
+    margin-right:230px ;
+  }
+ .btn-primary{
+  align-content: center;
+ }

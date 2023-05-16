@@ -1,0 +1,377 @@
+
+ header{
+  width: 100%;
+  height: 80px;
+  box-shadow: 0 0 10px -7px rgba(0,0,0,0.7);
+}
+
+header nav{
+  max-width: 85%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav h1{
+  color:#be7bf5;
+}
+
+header nav .avtar{
+  cursor: pointer;
+}
+  
+.navbar {
+  background-color: #be7bf5;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+}
+
+.nav-menu {
+  background-color:#be7bf5;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color:rgb(233, 199, 247);
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  background-color:#be7bf5;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+span {
+  margin-left: 16px;
+}
+h1{
+  color: #f5f5f5;
+}
+li{
+  list-style: none;
+}
+
+.page{
+  margin-left: 270px;
+  margin-right: 40px;
+}
+
+.card{
+  /* background-image: linear-gradient(to right,rgb(214, 127, 214),lavender); */
+  background: linear-gradient(150deg, #39ef74, #4600f1 100%);
+  width:300px;
+  border-radius:10px;
+  text-align: center;
+  margin-left:300px;
+  font-size: large;
+  font-weight: 700;
+  
+}
+.card1{
+  background-image: linear-gradient(to right,rgb(127, 214, 170),rgb(95, 202, 221));
+  width:300px;
+  border-radius:10px;
+  text-align: center;
+  margin-left:50px;
+  font-size: large;
+  font-weight: 700;
+}
+.card2{
+  /* background-image: linear-gradient(to right,rgb(127, 194, 214),rgb(95, 202, 221)); */
+  background: linear-gradient(150deg, #f731db, #4600f1 100%);
+  width:300px;
+  border-radius:10px;
+  text-align: center;
+  margin-left:50px;
+  font-size: large;
+  font-weight: 700;
+}
+.card3{
+  background-image: linear-gradient(to right,rgb(213, 241, 134),rgb(158, 233, 89));
+  width:300px;
+  border-radius:10px;
+  text-align: center;
+  margin-left:50px;
+  font-size: large;
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+
+.container1{
+  width: 40%;
+  color: white;
+  background: #255e98;
+  border-radius: 5px;
+  padding: 30px;
+  margin-left:500px;
+  margin-bottom:20px ;
+  height: 70%;
+}
+
+.title1{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.password-wrapper{
+  width: 87%;
+  height:50px;
+}
+
+.password-area{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.password-area .password{
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  position: relative;
+}
+
+.password-area .password input{
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  background: #caf0f8;
+  color: black;
+  line-height: 50px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 0 60px 0 20px;
+}
+
+.password-area .password .copyIcon{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 50px;
+  height: 100%;
+  padding: 12px;
+  transform: translate(0, -50%);
+  background: #f9ab55;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.setting{
+  margin: 20px 0;
+  height: 20%;
+}
+
+.customize{
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.customize .checkboxes{
+  display: flex;
+}
+
+.left, .right{
+  width: fit-content;
+}
+
+.customize .right{
+  margin-left: 30px;
+}
+
+.customize .checkboxes .checkbox-field{
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.customize .checkboxes .checkbox-field input{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.customize .checkboxes .checkbox-field input:checked{
+  accent-color: #f9ab55;
+}
+
+.customize .checkboxes .checkbox-field label{
+  line-height: 20px;
+}
+
+.slider{
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 50px;
+}
+
+.slider .rangeValue{
+  width: 80px;
+  height: 100%;
+  font-size: 22px;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  line-height: 50px;
+  text-align: center;
+}
+
+.slider .range{
+  width: calc(100% - 80px);
+  height: 100%;
+  margin-left: 20px;
+  border-radius: 5px;
+  border: none;
+  background: #fff;
+  outline: none;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider .range input{
+  width: 100%;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons button{
+  margin-left: 15px;
+  padding: 0 25px;
+  height: 50px;
+  border-radius: 50px;
+  font-size: 18px;
+  background-color: #f9ab55;
+  color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width:600px){
+
+  .title{
+      font-size: 20px;
+  }
+
+  .buttons{
+      display: block;
+  }
+
+  .buttons button{
+      width: 100%;
+      margin-left: 0;
+  }
+
+  .buttons button:last-child{
+      margin-top: 20px;
+  }
+
+}
+
+@media only screen and (max-width:768px){
+  .container1{
+      width: 100%;
+      margin: 0 30px;
+      padding: 20px;
+  }
+
+  .title1{
+      font-size: 22px;
+  }
+
+  h3{
+      font-size: 18px;
+  }
+
+  .customize .checkboxes{
+      display: block;
+  }
+
+  .customize .checkboxes .right{
+      margin-left: 0;
+  }
+
+  .password-area .password input{
+      font-size: 17px;
+  }
+  
+}
+
+@media (min-width: 769px) and (max-width:1024px){
+  .container{
+      width: 70%;
+      margin: 0 30px;
+  }
+
+}
+
+@media (min-width: 1025px) and (max-width:1300px){
+  .container{
+      width: 60%;
+      margin: 0 30px;
+  }
+} 
+
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap'); 
