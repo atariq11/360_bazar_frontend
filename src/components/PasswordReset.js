@@ -13,15 +13,15 @@ const PasswordReset = () => {
     const sendLink = async (e) => {
         e.preventDefault();
 
-        const res = await fetch("/sendpasswordlink", {
+        const response = await fetch("/auth/send-password-link", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ email })
-        });
-        const data = await res.json();
-        if (data.status == 201) {
+        }).then(data => data.json());
+
+        if (response.success) {
             setEmail("");
             setMessage(true)
         } else {
@@ -32,7 +32,7 @@ const PasswordReset = () => {
     }
 
     return (
-        <div classname="main">
+        <div className="main">
             <div className="formpr">
                 <div className="box1">
                     <h1>Enter your Email</h1>
@@ -45,7 +45,7 @@ const PasswordReset = () => {
                     </div>
                     <br />
                     <br />
-                    <div class="footer">
+                    <div className="footer">
                         <Link className='btn1' onClick={sendLink}><b>SEND</b></Link>
                     </div>
                     <ToastContainer />

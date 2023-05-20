@@ -16,149 +16,94 @@ import { FcSalesPerformance } from "react-icons/fc";
 
 
 import { ToastContainer, toast } from 'react-toastify';
-const lowercaseList = 'abcdefghijklmnopqrstuvwxyz';
-const uppercaseList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const numbersList = '0123456789';
-const symbolsList = "!@#$%^&*()?";
 
 const Dashboard = () => {
 
-    const { logindata, setLoginData } = useContext(LoginContext);
-
-    const [data, setData] = useState(false);
-
+    const { loginData, setLoginData } = useContext(LoginContext);
+    const [promoCode, setPromoCode] = useState({ success: false });
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [sidebar, setSidebar] = useState(false);
+    const showSidebar = () => setSidebar(!sidebar);
+    const history = useNavigate();
+
     const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
-    };
+    }
+
     const handleClose = () => {
         setAnchorEl(null);
-    };
+    }
 
-    const logoutuser = async () => {
-        let token = localStorage.getItem("usersdatatoken");
+    const logoutUser = async () => {
 
-        const res = await fetch("/logout", {
-            method: "GET",
+        const response = await fetch("/auth/sign-out", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": token,
+                "Authorization": `Bearer ${localStorage.getItem("usersdatatoken")}`,
                 Accept: "application/json"
             },
             credentials: "include"
-        });
+        }).then(data => data.json());
 
-        const data = await res.json();
-        console.log(data);
-
-        if (data.status == 201) {
+        if (response.success) {
 
             console.log("use logout");
             localStorage.removeItem("usersdatatoken");
-            setLoginData(false)
+            setLoginData("")
             history("/fpage");
         } else {
             console.log("error");
         }
     }
 
+    const validateDashboard = async () => {
 
-
-    const history = useNavigate();
-
-    const DashboardValid = async () => {
-        let token = localStorage.getItem("usersdatatoken");
-
-        const res = await fetch("/validuser", {
+        const response = await fetch("/users/self", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": token
-            }
-        });
+                "Authorization": `Bearer ${localStorage.getItem("usersdatatoken")}`,
+                Accept: "application/json"
+            },
+            credentials: "include"
+        }).then(data => data.json());
 
-        const data = await res.json();
-
-        if (data.status == 401 || !data) {
+        if (!response.success) {
             history("*");
         } else {
-            console.log("user verify");
-            setLoginData(data)
+            console.log("user verify", response);
+            getPromoCode(response);
+            setLoginData(response)
             history("/dash");
         }
     }
 
+    const getPromoCode = async ({ data }) => {
+
+        const response = await fetch(`/promo-codes/add-fetch/${data.id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("usersdatatoken")}`,
+                Accept: "application/json"
+            },
+            credentials: "include"
+        }).then(data => data.json());
+
+        if (!response.success) {
+            history("*");
+        } else {
+            console.log("getPromoCode success");
+            setPromoCode(response)
+        }
+    }
 
     useEffect(() => {
-        DashboardValid();
+        validateDashboard();
     }, [])
-
-    const [sidebar, setSidebar] = useState(false);
-
-    const showSidebar = () => setSidebar(!sidebar);
-
-    const [promocode, setPromocode] = useState('');
-    const [lowerCase, setLowerCase] = useState(true);
-    const [upperCase, setUpperCase] = useState(true);
-    const [numbers, setNumbers] = useState(true);
-    const [symbols, setSymbols] = useState(true);
-    const [promocodeLength, setPromocodeLength] = useState(8);
-    const [selectedChoices, setSelectedChoices] = useState(['lowercase', 'uppercase', 'numbers', 'symbols']);
-
-    useEffect(() => {
-        generatePromocode();
-    }, [promocodeLength]);
-
-    const handleCheckbox = (type) => {
-        let tempChoices = selectedChoices;
-        if (tempChoices.includes(type)) {
-            const index = tempChoices.indexOf(type);
-            tempChoices.splice(index, 1);
-        }
-        else {
-            tempChoices.push(type);
-        }
-        console.log(tempChoices);
-        setSelectedChoices(tempChoices);
-    }
-
-    const generatePromocode = () => {
-
-        let characterList = '';
-
-        if (lowerCase) {
-            characterList += lowercaseList;
-        }
-        if (upperCase) {
-            characterList += uppercaseList;
-        }
-        if (numbers) {
-            characterList += numbersList;
-        }
-        if (symbols) {
-            characterList += symbolsList;
-        }
-
-        let tempPromocode = '';
-        const characterListLength = characterList.length;
-
-        for (let i = 0; i < promocodeLength; i++) {
-            const characterIndex = Math.round(Math.random() * characterListLength);
-            tempPromocode += characterList.charAt(characterIndex);
-        }
-
-        setPromocode(tempPromocode);
-    }
-
-    const copyPromocode = async () => {
-        const copiedText = await navigator.clipboard.readText();
-        if (promocode.length && copiedText !== promocode) {
-            navigator.clipboard.writeText(promocode);
-            alert('Promocode copied to clipboard');
-        }
-    }
-
 
     return (
 
@@ -175,8 +120,16 @@ const Dashboard = () => {
 
                             <div className="avtar">
                                 {
-                                    logindata.ValidUserOne ? <Avatar style={{ background: "salmon", fontWeight: "bold", textTransform: "capitalize" }} onClick={handleClick}>{logindata.ValidUserOne.fname[0].toUpperCase()}</Avatar> :
-                                        <Avatar style={{ background: "blue" }} onClick={handleClick} />
+                                    loginData.success ? (<Avatar
+                                        style={{
+                                            background: "salmon",
+                                            fontWeight: "bold",
+                                            textTransform: "capitalize"
+                                        }}
+                                        onClick={handleClick}> {
+                                            loginData.data.fullName[0].toUpperCase()
+                                        }
+                                    </Avatar>) : (<Avatar style={{ background: "blue" }} onClick={handleClick} />)
                                 }
 
                             </div>
@@ -190,18 +143,15 @@ const Dashboard = () => {
                                 }}
                             >
                                 {
-                                    logindata.ValidUserOne ? (
-                                        <>
-
+                                    loginData.success ? (
+                                        [
                                             <MenuItem onClick={() => {
-                                                logoutuser()
+                                                logoutUser()
                                                 handleClose()
                                             }}>Logout</MenuItem>
-                                        </>
+                                        ]
                                     ) : (
-                                        <>
-
-                                        </>
+                                        []
                                     )
                                 }
                             </Menu>
@@ -217,7 +167,7 @@ const Dashboard = () => {
                             </Link>
                         </li>
                         <li>
-                            <h2 style={{ color: "white", fontSize: "small" }}>UserEmail:<br />{logindata ? logindata.ValidUserOne.email : ""}</h2>
+                            <h2 style={{ color: "white", fontSize: "small" }}>UserEmail:<br />{loginData.success && loginData.data.email}</h2>
                         </li>
                         {SidebarData.map((item, index) => {
                             return (
@@ -273,60 +223,9 @@ const Dashboard = () => {
 
             <br />
             <div className='container1'>
-                <h2 className='title1'>PromoCode Generator</h2>
-                <div className="password-wrapper">
-                    <div className="password-area">
-                        <div className="password">
-                            <h1>Click on Generate Promocode</h1>
-                            <input type="text" value={promocode} />
-                        </div>
-                    </div>
-                </div>
-                <br /><br /><br />
-                <div className="setting">
-                    <h3>Customize your promocode</h3>
-                    <div className="customize">
-                        <div className="checkboxes">
-                            <div className="left">
-                                <div className="checkbox-field">
-                                    <input type="checkbox" name="lower" id="lower" checked={lowerCase} disabled={selectedChoices.length === 1 && selectedChoices.includes("lowercase")} onChange={() => { setLowerCase(!lowerCase); handleCheckbox('lowercase'); }} />
-                                    <label htmlFor="lower">Include LowerCase(a-z)</label>
-                                </div>
-                                <div className="checkbox-field">
-                                    <input type="checkbox" name="upper" id="upper" checked={upperCase} disabled={selectedChoices.length === 1 && selectedChoices.includes('uppercase')} onChange={() => { setUpperCase(!upperCase); handleCheckbox('uppercase'); }} />
-                                    <label htmlFor="upper">Include UpperCase(A-Z)</label>
-                                </div>
-                            </div>
-                            <div className="right">
-                                <div className="checkbox-field">
-                                    <input type="checkbox" name="numbers" id="numbers" checked={numbers} disabled={selectedChoices.length === 1 && selectedChoices.includes('numbers')} onChange={() => { setNumbers(!numbers); handleCheckbox('numbers'); }} />
-                                    <label htmlFor="numbers">Include Numbers(0-9)</label>
-                                </div>
-                                <div className="checkbox-field">
-                                    <input type="checkbox" name="symbols" id="symbols" checked={symbols} disabled={selectedChoices.length === 1 && selectedChoices.includes('symbols')} onChange={() => { setSymbols(!symbols); handleCheckbox('symbols'); }} />
-                                    <label htmlFor="symbols">Include Symbols(&-#)</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="password-length">
-                    <h3>PromoCode Length</h3>
-                    <div className="slider">
-                        <p className="rangeValue">{promocodeLength}</p>
-                        <div className="range">
-                            <input type="range" min={8} max={40} defaultValue={promocodeLength} onChange={(event) => setPromocodeLength(event.currentTarget.value)} />
-                        </div>
-                    </div>
-                </div>
-                <div className="buttons">
-                    <button type='button' onClick={copyPromocode}>Copy PromoCode</button>
-                    <button type='button' onClick={generatePromocode}>Generate PromoCode</button>
-                </div>
+                <h2 className='title1'>PromoCode : {promoCode && promoCode.success && promoCode.data.code}</h2>
             </div>
             <ToastContainer />
-
-
         </>
     )
 }

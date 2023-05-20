@@ -6,7 +6,7 @@ const Signup = () => {
     const [cpassShow, setCPassShow] = useState(false);
 
     const [inpval, setInpval] = useState({
-        fname: "",
+        fullName: "",
         email: "",
         password: "",
         cpassword: ""
@@ -26,10 +26,10 @@ const Signup = () => {
     const addUserdata = async (e) => {
 
         e.preventDefault();
-        const { fname, email, password, cpassword } = inpval;
+        const { fullName, email, password, cpassword } = inpval;
 
-        if (fname === "") {
-            alert("fname is required!");
+        if (fullName === "") {
+            alert("fullName is required!");
         }
         else if (!email.includes("@")) {
             alert("includes @ in your email!");
@@ -48,29 +48,25 @@ const Signup = () => {
 
 
 
-            const data = await fetch("/register ", {
+            const response = await fetch("/auth/sign-up ", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    fname, email, password, cpassword
+                    fullName, email, password, roleCode: "am"
                 })
-            });
-
-            const res = await data.json();
-            console.log(res.status);
-
-            if (res.status === (201)) {
+            }).then(data => data.json());
+            if (response.success) {
                 alert(" user Registration done");
-                setInpval({ ...inpval, fname: "", email: "", password: "", cpassword: "" })
+                setInpval({ ...inpval, fullName: "", email: "", password: "", cpassword: "" })
             }
 
         }
     }
     return (
 
-        <div classname="main">
+        <div className="main">
             <div className="form">
                 <div className="box">
                     <h2>360-Bazar Affiliates Signup</h2>
@@ -79,8 +75,8 @@ const Signup = () => {
                 </div>
                 <div className="form-body">
                     <div className="username">
-                        <label className="form__label" htmlFor="fname">Name </label><br />
-                        <input className="form__input" type="text" id="firstName" name="fname" onChange={setVal} value={inpval.fname} />
+                        <label className="form__label" htmlFor="fullName">Name </label><br />
+                        <input className="form__input" type="text" id="firstName" name="fullName" onChange={setVal} value={inpval.fullName} />
                     </div>
                     <div className="email">
                         <label className="form__label" htmlFor="email">Email </label><br />
@@ -108,7 +104,7 @@ const Signup = () => {
                     </div>
                 </div>
                 <br />
-                <div class="footer">
+                <div className="footer">
                     <button className="btn1" onClick={addUserdata}><b>SIGN UP</b></button>
                 </div>
                 <br />

@@ -53,7 +53,7 @@ const Login = () => {
             }).then(data => data.json());
 
             if (response.success) {
-                localStorage.setItem("usersdatatoken", res.result.token);
+                localStorage.setItem("usersdatatoken", response.data.accessToken);
                 history("/dash")
                 setInpval({ ...inpval, email: "", password: "" });
             } else {
@@ -66,7 +66,7 @@ const Login = () => {
 
 
     return (
-        <div classname="main">
+        <div className="main">
             <div className="forml">
                 <div className="box">
                     <h2>360-Bazar Affiliates login</h2>
@@ -91,7 +91,7 @@ const Login = () => {
                 </div>
                 <br />
                 <br />
-                <div class="footer">
+                <div className="footer">
                     <Link to='/dashboard' className='btn1' onClick={loginuser}><b>LOGIN</b></Link>
                 </div>
                 <br />

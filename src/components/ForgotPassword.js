@@ -1,11 +1,11 @@
-import React , { useEffect, useState }  from 'react'
-import {useNavigate ,Link , useParams } from 'react-router-dom';
-import { ToastContainer,toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, Link, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
-const ForgotPassword= () => {
+const ForgotPassword = () => {
 
-    const  { id, token } = useParams();
+    const { id, token } = useParams();
 
     const [password, setPassword] = useState("");
 
@@ -14,22 +14,22 @@ const ForgotPassword= () => {
     const history = useNavigate();
 
     const userValid = async () => {
-        const res = await fetch(`/forgotpassword/${id}/${token}`, {
+
+        const response = await fetch(`/auth/forgot-password/${id}/${token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
-        });
+        }).then(data => data.json());
 
-        const data = await res.json()
-
-        if (data.status == 201) {
+        if (response.success) {
             console.log("user valid")
         } else {
             history("*")
         }
     }
-   const setval = (e) => {
+
+    const setval = (e) => {
         setPassword(e.target.value)
     }
     const sendpassword = async (e) => {
@@ -44,21 +44,21 @@ const ForgotPassword= () => {
                 position: "top-center"
             });
         } else {
-            const res = await fetch(`/${id}/${token}`, {
+
+            const response = await fetch(`http://localhost:9786/auth/rest-password/${id}/${token}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ password })
-            });
-            const data = await res.json()
+            }).then(data => data.json());
 
-            if (data.status == 201) {
+            if (response.success) {
                 setPassword("")
                 setMessage(true)
             } else {
-                alert("! Token Expired generate new LInk",{
-    
+                alert("! Token Expired generate new LInk", {
+
                 })
             }
         }
@@ -66,32 +66,28 @@ const ForgotPassword= () => {
     useEffect(() => {
         userValid()
     }, [])
-  return(
-    <>
-       <div classname="main">
-        <div className="formpr">
-        <div className="box1">
-                <h1>Enter your New Password</h1>  
+    return (
+        <div className="main">
+            <div className="formpr">
+                <div className="box1">
+                    <h1>Enter your New Password</h1>
+                </div>
+                {message ? <p style={{ color: "green", fontWeight: "bold" }}>Password Succesfully Update </p> : ""}
+                <div className="form-body">
+                    <div className="email">
+                        <label className="form__label" htmlFor="email">Password </label><br />
+                        <input type="password" id="password" className="form__input" name="password" value={password} onChange={setval} />
+                    </div>
+                    <br />
+                    <br />
+                    <div className="footer">
+                        <Link className='btn1' onClick={sendpassword}><b>SendPassword</b></Link>
+                    </div>
+                    <ToastContainer />
+                </div>
             </div>
-            {message ? <p style={{ color: "green", fontWeight: "bold" }}>Password Succesfully Update </p> : ""}
-          <div className="form-body">
-          <div className="email">
-                  <label className="form__label" htmlFor="email">Password </label><br/>
-                  <input  type="password" id="password" className="form__input" name="password" value={password} onChange={setval} />
-              </div>
-              <br/>
-          <br/>
-          <div class="footer">
-          <Link  className='btn1' onClick={sendpassword}><b>SendPassword</b></Link>
-          </div>
-          <ToastContainer />
-              </div>
-             
-</div></div>
-    
-    
-    </>
-  )
+        </div>
+    )
 }
 
 export default ForgotPassword

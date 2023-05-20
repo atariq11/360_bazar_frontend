@@ -34,7 +34,7 @@ const Navbar = () => {
           <Route path='/dash' element={<Dash />} />
           <Route path='*' element={<Error />} />
           <Route path='/password-reset' element={<PasswordReset />} />
-          <Route path='/forgotpassword/:id/:token' element={<ForgotPassword />} />
+          <Route path='/forgot-password/:id/:token' element={<ForgotPassword />} />
         </Routes>
       </BrowserRouter>
     </nav>
