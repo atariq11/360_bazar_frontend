@@ -5,11 +5,11 @@
         "es2021": true,
         "node": true,
         "jest": true
-    },
-    "sourceType": "module",
+    }, 
     "extends": "eslint:recommended",
     "parserOptions": { 
-        "ecmaVersion": 2022 
+        "ecmaVersion": 2022,
+        "sourceType": "module" 
     }, 
     "globals": { 
     },
