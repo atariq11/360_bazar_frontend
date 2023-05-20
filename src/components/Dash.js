@@ -58,8 +58,7 @@ const Dashboard = () => {
             localStorage.removeItem("usersdatatoken");
             setLoginData(false)
             history("/fpage");
-        }
-        else {
+        } else {
             console.log("error");
         }
     }
