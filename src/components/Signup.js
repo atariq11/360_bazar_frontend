@@ -65,53 +65,55 @@ const Signup = () => {
         }
     }
     return (
-
-        <div className="main">
-            <div className="form">
-                <div className="box">
-                    <h2>360-Bazar Affiliates Signup</h2>
-                    <p>Thank you for your interest in the 360-Bazar affiliate program. Please provide the
-                        following information to sign-up as an affiliate partner with 360-Bazar.</p>
-                </div>
-                <div className="form-body">
-                    <div className="username">
-                        <label className="form__label" htmlFor="fullName">Name </label><br />
-                        <input className="form__input" type="text" id="firstName" name="fullName" onChange={setVal} value={inpval.fullName} />
+        <>
+            <div className="main">
+                <div className="form">
+                    <div className="box">
+                        <h2>360-Bazar Affiliates Signup</h2>
+                        <p>Thank you for your interest in the 360-Bazar affiliate program. Please provide the
+                            following information to sign-up as an affiliate partner with 360-Bazar.</p>
                     </div>
-                    <div className="email">
-                        <label className="form__label" htmlFor="email">Email </label><br />
-                        <input type="email" id="email" className="form__input" name="email" onChange={setVal} value={inpval.email} />
-                    </div>
+                    <div className="form-body">
+                        <div className="username">
+                            <label className="form__label" htmlFor="fullName">Name </label><br />
+                            <input className="form__input" type="text" id="firstName" name="fullName" onChange={setVal} value={inpval.fullName} />
+                        </div>
+                        <div className="email">
+                            <label className="form__label" htmlFor="email">Email </label><br />
+                            <input type="email" id="email" className="form__input" name="email" onChange={setVal} value={inpval.email} />
+                        </div>
 
-                    <div className="password">
-                        <label className="form__label" htmlFor="password">Password</label>
-                        <div className="two">
-                            <input className="form__inputpass" type={!passShow ? "password" : "text"} onChange={setVal} value={inpval.password} name="password" id="password" />
-                            <div className="showpass" onClick={() => setPassShow(!passShow)}>
-                                {!passShow ? "Show" : "Hide"}
+                        <div className="password">
+                            <label className="form__label" htmlFor="password">Password</label>
+                            <div className="two">
+                                <input className="form__inputpass" type={!passShow ? "password" : "text"} onChange={setVal} value={inpval.password} name="password" id="password" />
+                                <div className="showpass" onClick={() => setPassShow(!passShow)}>
+                                    {!passShow ? "Show" : "Hide"}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="password">
+                            <label className="form__label" htmlFor="password">Confirm Password</label>
+                            <div className="two">
+                                <input className="form__inputpass" type={!cpassShow ? "password" : "text"} value={inpval.cpassword} onChange={setVal} name="cpassword" id="cpassword" />
+                                <div className="showpass" onClick={() => setCPassShow(!cpassShow)}>
+                                    {!cpassShow ? "Show" : "Hide"}
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div className="password">
-                        <label className="form__label" htmlFor="password">Confirm Password</label>
-                        <div className="two">
-                            <input className="form__inputpass" type={!cpassShow ? "password" : "text"} value={inpval.cpassword} onChange={setVal} name="cpassword" id="cpassword" />
-                            <div className="showpass" onClick={() => setCPassShow(!cpassShow)}>
-                                {!cpassShow ? "Show" : "Hide"}
-                            </div>
-                        </div>
+                    <br />
+                    <div className="footer">
+                        <button className="btn1" onClick={addUserdata}><b>SIGN UP</b></button>
                     </div>
+                    <br />
+                    <p>Already have an Account?<Link to="/login" id="loginlink">Login</Link> </p>
                 </div>
-                <br />
-                <div className="footer">
-                    <button className="btn1" onClick={addUserdata}><b>SIGN UP</b></button>
-                </div>
-                <br />
-                <p>Already have an Account?<Link to="/login" id="loginlink">Login</Link> </p>
             </div>
-        </div>
 
+
+        </>
     )
 }
 export default Signup;

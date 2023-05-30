@@ -1,27 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { LoginContext } from './ContextProvider/Context';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
+import { LoginContext } from './ContextProvider/Context';
+import React, { useContext, useState } from 'react';
+import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { SidebarData } from './SidebarData';
-import { IconContext } from 'react-icons';
-import { FcConferenceCall } from "react-icons/fc";
-import { FcBearish } from "react-icons/fc";
-import { FcLike } from "react-icons/fc";
-import { FcSalesPerformance } from "react-icons/fc";
-import { ToastContainer, toast } from 'react-toastify';
+import * as AiIcons from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
-const Dashboard = () => {
+import { TextField } from "@mui/material";
+
+const Profile = () => {
 
     const { loginData, setLoginData } = useContext(LoginContext);
-    const [promoCode, setPromoCode] = useState({ success: false });
     const [anchorEl, setAnchorEl] = React.useState(null);
+
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
+
     const history = useNavigate();
 
     const open = Boolean(anchorEl);
@@ -57,57 +55,7 @@ const Dashboard = () => {
         }
     }
 
-    const validateDashboard = async () => {
-
-        const response = await fetch("/users/self", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("usersdatatoken")}`,
-                Accept: "application/json"
-            },
-            credentials: "include"
-        }).then(data => data.json());
-
-        if (!response.success) {
-            history("*");
-        } else {
-            console.log("user verify", response);
-            getPromoCode(response);
-            setLoginData(response)
-            history("/dash");
-        }
-    }
-
-    const getPromoCode = async ({ data }) => {
-
-        const response = await fetch(`/promo-codes/add-fetch/${data.id}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("usersdatatoken")}`,
-                Accept: "application/json"
-            },
-            credentials: "include"
-        }).then(data => data.json());
-
-        if (!response.success) {
-            history("*");
-        } else {
-            console.log("getPromoCode success");
-            setPromoCode(response)
-        }
-    }
-
-    useEffect(() => {
-        validateDashboard();
-    }, [])
-
-
-
-
     return (
-
         <>
 
             <div>  <IconContext.Provider value={{ color: 'purple' }}>
@@ -183,54 +131,45 @@ const Dashboard = () => {
                     </ul>
                 </nav>
             </IconContext.Provider></div>
-            <br />
+            <div className='profile'>
+                <h2 class="mt-5 ml-5" style={{ color: 'black', marginLeft: "42%" }}>My Profile</h2>
+                <div className="avatar">
+                    {
+                        loginData.success ? (<Avatar
+                            style={{
+                                background: "salmon",
+                                fontWeight: "bold",
+                                textTransform: "capitalize",
+                                height: "10rem",
+                                width: "10rem",
+                                marginLeft: "40%"
+                            }}
+                            onClick={handleClick}> {
+                                loginData.data.fullName[0].toUpperCase()
+                            }
+                        </Avatar>) : (<Avatar style={{ background: "blue" }} onClick={handleClick} />)
+                    }
+                    <div >
+                        <h1 style={{ color: 'black' }} >Full Name</h1>
+                        <TextField id="standard-basic" label={loginData.success && loginData.data.fullName} variant="standard" style={{ width: "80%" }} />
 
-            <div className="cardBox" style={{ display: 'flex' }}>
-                <div className="card">
-                    <div>
-                        <div className="cardName">Commission</div>
-                        <div className="numbers">Rs 1,500.000</div>
-                        <FcSalesPerformance id="money" size={40}></FcSalesPerformance>
 
-                    </div>
-                </div>
+                        <h1 style={{ color: 'black' }}>Email Address</h1>
+                        <TextField id="standard-basic" label={loginData.success && loginData.data.email} variant="standard" style={{ width: "80%", color: "black" }} />
 
-                <div className="card1">
-                    <div>
-                        <div className="cardName">Sales</div>
-                        <div className="numbers">300+</div>
-                        <FcBearish size={40}></FcBearish>
 
-                    </div>
-                </div>
-                <div className="card2">
-                    <div>
-                        <div className="cardName">Users</div>
-                        <div className="numbers">30+</div>
-                        <FcConferenceCall size={40}></FcConferenceCall>
-
-                    </div>
-                </div>
-                <div className="card3">
-                    <div>
-                        <div className="cardName">Rewards</div>
-                        <div className="numbers">5+</div>
-                        <FcLike size={40}></FcLike>
 
                     </div>
+
                 </div>
             </div>
 
 
-            <br />
-            <div className='container1'>
-                <h1>HERE IS YOUR PROMOCODE</h1>
-                <h2 className='title1'>PromoCode : {promoCode && promoCode.success && promoCode.data.code}</h2>
 
-            </div>
-            <ToastContainer />
         </>
-    )
-}
 
-export default Dashboard
+
+
+    );
+};
+export default Profile;

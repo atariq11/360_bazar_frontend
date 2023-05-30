@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Fpage from './Fpage';
 import Error from './Error';
 import Home from './Home';
+import Profile from './Profile';
 import PasswordReset from './PasswordReset';
 import ForgotPassword from './ForgotPassword';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -35,6 +36,8 @@ const Navbar = () => {
           <Route path='*' element={<Error />} />
           <Route path='/password-reset' element={<PasswordReset />} />
           <Route path='/forgot-password/:id/:token' element={<ForgotPassword />} />
+          <Route path='/profile' element={<Profile />} />
+
         </Routes>
       </BrowserRouter>
     </nav>
