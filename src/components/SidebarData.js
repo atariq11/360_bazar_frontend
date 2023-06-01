@@ -28,11 +28,5 @@ export const SidebarData = [
     path: '/Chatbot',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
-  },
-  {
-    title: 'Setting',
-    path: '/setting',
-    icon: <IoIcons.IoMdHelpCircle />,
-    cName: 'nav-text'
   }
 ];

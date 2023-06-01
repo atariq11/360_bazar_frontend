@@ -9,11 +9,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
-// import { FcConferenceCall } from "react-icons/fc";
-// import { FcBearish } from "react-icons/fc";
-// import { FcLike } from "react-icons/fc";
-// import { FcSalesPerformance } from "react-icons/fc";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const Dashboard = () => {
 
@@ -184,43 +180,6 @@ const Dashboard = () => {
                 </nav>
             </IconContext.Provider></div>
             <br />
-
-            {/* <div className="cardBox" style={{ display: 'flex' }}>
-                <div className="card">
-                    <div>
-                        <div className="cardName">Commission</div>
-                        <div className="numbers">Rs 1,500.000</div>
-                        <FcSalesPerformance id="money" size={40}></FcSalesPerformance>
-
-                    </div>
-                </div>
-
-                <div className="card1">
-                    <div>
-                        <div className="cardName">Sales</div>
-                        <div className="numbers">300+</div>
-                        <FcBearish size={40}></FcBearish>
-
-                    </div>
-                </div>
-                <div className="card2">
-                    <div>
-                        <div className="cardName">Users</div>
-                        <div className="numbers">30+</div>
-                        <FcConferenceCall size={40}></FcConferenceCall>
-
-                    </div>
-                </div>
-                <div className="card3">
-                    <div>
-                        <div className="cardName">Rewards</div>
-                        <div className="numbers">5+</div>
-                        <FcLike size={40}></FcLike>
-
-                    </div>
-                </div>
-            </div> */}
-
 
             <br />
             <div className='container1'>
