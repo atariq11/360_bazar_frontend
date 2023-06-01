@@ -11,6 +11,7 @@ import ForgotPassword from './ForgotPassword';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Dash from './Dash';
 import Chatbot from './Chatbot';
+import Chat from './Chat';
 const Navbar = () => {
   return (
 
@@ -39,6 +40,7 @@ const Navbar = () => {
           <Route path='/forgot-password/:id/:token' element={<ForgotPassword />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/chatbot' element={<Chatbot />} />
+          <Route path='/chat' element={<Chat />} />
 
         </Routes>
       </BrowserRouter>

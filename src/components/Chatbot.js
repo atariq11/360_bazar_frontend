@@ -50,8 +50,12 @@ const Chatbot = () => {
             console.log("error");
         }
     }
+
+
+
     return (
         <>
+
             <div>  <IconContext.Provider value={{ color: 'purple' }}>
                 <div className='navbar'>
                     <Link to='#' className='menu-bars'>

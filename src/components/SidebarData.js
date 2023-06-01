@@ -28,5 +28,11 @@ export const SidebarData = [
     path: '/Chatbot',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
+  },
+  {
+    title: 'Messages',
+    path: '/Chat',
+    icon: <FaIcons.FaEnvelopeOpenText />,
+    cName: 'nav-text'
   }
 ];
