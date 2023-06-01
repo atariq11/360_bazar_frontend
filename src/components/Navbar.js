@@ -40,8 +40,8 @@ const Navbar = () => {
           <Route path='/forgot-password/:id/:token' element={<ForgotPassword />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/chatbot' element={<Chatbot />} />
-          <Route path='/chat' element={<Chat />} />
 
+          <Route path='/chat' element={<Chat />} />
         </Routes>
       </BrowserRouter>
     </nav>

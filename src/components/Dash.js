@@ -4,12 +4,13 @@ import { LoginContext } from './ContextProvider/Context';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
-import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
 import { ToastContainer } from 'react-toastify';
+import Chat from './Chat';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 const Dashboard = () => {
 
@@ -190,6 +191,9 @@ const Dashboard = () => {
             <ToastContainer />
 
 
+            {/* <Routes>
+                <Route path='/chat' element={<Chat />} />
+            </Routes> */}
         </>
     )
 }
